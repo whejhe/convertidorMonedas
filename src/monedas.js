@@ -1,4 +1,4 @@
-export const monedasLista= [
+const monedasLista= [
 {"code":"ADA","value":3.0613845706},
 {"code":"AED","value":3.9964198189},
 {"code":"AFN","value":76.2408405253},
