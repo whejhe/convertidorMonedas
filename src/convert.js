@@ -1,11 +1,11 @@
-// src/components/Formulario.js
 import React, { useState } from 'react';
 import  monedasLista  from './monedas.js';
+import './convert.css';
 
 const Formulario = () => {
     const [euros, setEuros] = useState(0);
     const [cambio, setCambio] = useState(0);
-    const [monedaSeleccionada, setMonedaSeleccionada] = useState('USD'); // Moneda por defecto, puedes cambiarla según tus necesidades
+    const [monedaSeleccionada, setMonedaSeleccionada] = useState('USD');
 
     const handleEurosChange = (e) => {
         const valorEuros = parseFloat(e.target.value);
@@ -29,21 +29,24 @@ const Formulario = () => {
     };
 
     return (
-        <div>
-            <label>Euros:</label>
-            <input type="number" value={euros} onChange={handleEurosChange} />
-
-            <label>Selecciona moneda:</label>
-            <select value={monedaSeleccionada} onChange={handleMonedaChange}>
+        <div className='title'>
+            <h1>Convertidor de Moneda</h1>
+        <div className='form'>
+        <label>Selecciona moneda:</label>
+        <select value={monedaSeleccionada} onChange={handleMonedaChange}>
                 {monedasLista.map((moneda) => (
                     <option key={moneda.code} value={moneda.code}>
                         {moneda.code}
                     </option>
                 ))}
             </select>
+            <br></br>
+            <label>Euros:</label>
+            <input type="number" value={euros} onChange={handleEurosChange} />
 
-            <label>Cambio en otra moneda:</label>
+            <label>Cambio a {monedaSeleccionada}:</label>
             <input type="number" value={cambio} onChange={handleCambioChange} />
+        </div>
         </div>
     );
 };

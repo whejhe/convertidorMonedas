@@ -1,0 +1,21 @@
+.form{
+    border: 1px solid black;
+    padding: 1em;
+    margin: 2em auto;
+    width: 50%;
+    background-color: antiquewhite;
+}
+
+.title{
+    text-align: center;
+    text-decoration: underline;
+}
+
+select{
+    margin-bottom: 2em;
+}
+
+label{
+    margin-left: 2em;
+    margin-right: 0.5em;
+}
