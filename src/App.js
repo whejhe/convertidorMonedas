@@ -1,12 +1,12 @@
 import React from 'react';
-import CurrencyConverter from './convert';
+import Formulario from './convert';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
       </header>
-      <CurrencyConverter />
+      <Formulario />
     </div>
   );
 }

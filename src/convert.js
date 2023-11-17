@@ -1,34 +1,51 @@
-import React from 'react';
-import monedasLista from './monedas.js';
-/*Usando React, vamos a crear un conversor de monedas a euros y viceversa. Se proporciona
-un listado del valor de un euro en la moneda a cambiar Se debe poder seleccionar la moneda
-que se quiere cambiar. Se debe poder cambiar de euros a la moneda seleccionada y de la
-moneda seleccionada a euros.*/
+// src/components/Formulario.js
+import React, { useState } from 'react';
+import  monedasLista  from './monedas.js';
 
-function convertirMoneda() {
-    const valorMoneda = monedasLista.value;
-    const codigoMoneda = monedasLista.code;
-    const Euros = "1";
+const Formulario = () => {
+    const [euros, setEuros] = useState(0);
+    const [cambio, setCambio] = useState(0);
+    const [monedaSeleccionada, setMonedaSeleccionada] = useState('USD'); // Moneda por defecto, puedes cambiarla según tus necesidades
 
+    const handleEurosChange = (e) => {
+        const valorEuros = parseFloat(e.target.value);
+        setEuros(valorEuros);
+        const nuevoCambio = valorEuros * monedasLista.find(moneda => moneda.code === monedaSeleccionada).value;
+        setCambio(nuevoCambio);
+    };
+
+    const handleCambioChange = (e) => {
+        const valorCambio = parseFloat(e.target.value);
+        setCambio(valorCambio);
+        const nuevoEuros = valorCambio / monedasLista.find(moneda => moneda.code === monedaSeleccionada).value;
+        setEuros(nuevoEuros);
+    };
+
+    const handleMonedaChange = (e) => {
+        const nuevaMoneda = e.target.value;
+        setMonedaSeleccionada(nuevaMoneda);
+        const nuevaTasaDeCambio = euros * monedasLista.find(moneda => moneda.code === nuevaMoneda).value;
+        setCambio(nuevaTasaDeCambio);
+    };
 
     return (
-        <form>
-            <h1>Convertidor de Moneda</h1>
-            <select value={valorMoneda}>
-                <option value="">Seleccione una moneda</option>
+        <div>
+            <label>Euros:</label>
+            <input type="number" value={euros} onChange={handleEurosChange} />
+
+            <label>Selecciona moneda:</label>
+            <select value={monedaSeleccionada} onChange={handleMonedaChange}>
                 {monedasLista.map((moneda) => (
                     <option key={moneda.code} value={moneda.code}>
                         {moneda.code}
                     </option>
                 ))}
-                <option value={valorMoneda} code={codigoMoneda}>
-                    {codigoMoneda}
-                </option>
             </select>
-            <input type="text" default={Euros} />
-            <input type="text" value={codigoMoneda} />
-        </form>
-    );
-}
 
-export default convertirMoneda;
+            <label>Cambio en otra moneda:</label>
+            <input type="number" value={cambio} onChange={handleCambioChange} />
+        </div>
+    );
+};
+
+export default Formulario;
