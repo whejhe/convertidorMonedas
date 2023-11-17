@@ -10,21 +10,21 @@ const Formulario = () => {
     const handleEurosChange = (e) => {
         const valorEuros = parseFloat(e.target.value);
         setEuros(valorEuros);
-        const nuevoCambio = valorEuros * monedasLista.find(moneda => moneda.code === monedaSeleccionada).value;
+        const nuevoCambio = parseFloat(valorEuros * monedasLista.find(moneda => moneda.code === monedaSeleccionada).value.toFixed(2));
         setCambio(nuevoCambio);
     };
 
     const handleCambioChange = (e) => {
         const valorCambio = parseFloat(e.target.value);
         setCambio(valorCambio);
-        const nuevoEuros = valorCambio / monedasLista.find(moneda => moneda.code === monedaSeleccionada).value;
+        const nuevoEuros = parseFloat(valorCambio / monedasLista.find(moneda => moneda.code === monedaSeleccionada).value.toFixed(2));
         setEuros(nuevoEuros);
     };
 
     const handleMonedaChange = (e) => {
         const nuevaMoneda = e.target.value;
         setMonedaSeleccionada(nuevaMoneda);
-        const nuevaTasaDeCambio = euros * monedasLista.find(moneda => moneda.code === nuevaMoneda).value;
+        const nuevaTasaDeCambio = parseFloat(euros * monedasLista.find(moneda => moneda.code === nuevaMoneda).value.toFixed(2));
         setCambio(nuevaTasaDeCambio);
     };
 
